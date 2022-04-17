@@ -31,8 +31,9 @@ if __name__ == "__main__":
         print('''Welcome to AI Brain MRI Tumor Detector App
                 1) Load an Brain MRI Image
                 2) Load an DICOM File
-                3) About
-                4) Exit
+                3) Dump DICOM data
+                4) About
+                5) Exit
                 Copyright © 0rbianta / Cem Pişkinpaşa / OrxAI''')
 
         usr = input("prompt > ")
@@ -96,8 +97,33 @@ if __name__ == "__main__":
                 print("Failed to load DICOM due to file being unable to found at the given path.")
             except:
                 print("Failed to continue processing DICOM due to an unknown error.")
-
         elif usr == 3:
+            print("Enter the path of and DICOM file.")
+            usr = input("prompt > option 3 > ")
+            try:
+                dicom = dcmread(usr)
+                print("Patient Age:", dicom.PatientAge)
+                print("Patient Name:", dicom.PatientName)
+                print("Patient Sex:", dicom.PatientSex)
+                print("Patient Size", dicom.PatientSize)
+                print("Patient Weight", dicom.PatientWeight)
+                print("Series UID", dicom.SeriesInstanceUID)
+
+                print("Study Date:", dicom.StudyDate)
+                print("Study ID:", dicom.StudyID)
+                
+                img = PIL.Image.fromarray(dicom.pixel_array.astype(np.uint8))
+                img = img.convert("RGB")
+                img.thumbnail((224, 244), PIL.Image.Resampling.LANCZOS)
+                img.show()
+
+            except FileNotFoundError:
+                print("Failed to load DICOM due to file being unable to found at the given path.")
+            except:
+                print("Failed to continue processing DICOM due to an unknown error.")
+
+
+        elif usr == 4:
             print('🥳 Hello there!\nI\'m Cem Pişkinpaşa, also known as 0rbianta and /dev/null on internet. ' \
             'Lastly I were having some possible neurological problems so I spent some time on the hospital. ' \
             'My neurological peak went nice. I glad that my brain and body were working together very well and responsing to all the tests doctor applied. ' \
@@ -114,7 +140,7 @@ if __name__ == "__main__":
             print(Fore.BLACK + 'Cem Pişkinpaşa(He/him)')
             print('Mail: orbianta@protonmail.com')
             print('GitHub: https://github.com/0rbianta')
-        elif usr == 4 or usr == "exit" or usr == "exit()" or usr == "q":
+        elif usr == 5 or usr == "exit" or usr == "exit()" or usr == "q":
             print(randchoice(["👋 Good Bye!", "👋 See you!", "👋 We wish you healthy days!"]))
             exit(0)
         else:
