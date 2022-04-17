@@ -2,7 +2,6 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img
 import numpy as np
 
-
 class neuralRunner:
     def __init__(self, modelPath, labelPath):
         self.net = load_model(modelPath)
@@ -13,7 +12,7 @@ class neuralRunner:
         self.labels = file.read().split("\n")
         file.close()
 
-    def loadImage(self, imgPath):
+    def loadImageFromPath(self, imgPath):
         try:
             return load_img(imgPath, target_size=(224, 224, 3))
         except FileNotFoundError:
