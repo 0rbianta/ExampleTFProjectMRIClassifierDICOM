@@ -31,7 +31,7 @@ if __name__ == "__main__":
         print('''Welcome to AI Brain MRI Tumor Detector App
                 1) Load an Brain MRI Image
                 2) Load an DICOM File
-                3) Dump DICOM data
+                3) Dump DICOM Data
                 4) About
                 5) Exit
                 Copyright © 0rbianta / Cem Pişkinpaşa / OrxAI''')
